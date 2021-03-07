@@ -1,4 +1,4 @@
-package Notepad.Vlad.com;
+package Vlad.com;
 
 import java.io.IOException;
 import java.nio.file.Files;
