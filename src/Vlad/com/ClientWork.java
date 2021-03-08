@@ -53,17 +53,18 @@ public class ClientWork {
             toFileMark1:
             if (file.check()) {
                 System.out.println("Блокнот открыт, можно записывать");
-                BufferedReader initPen = new BufferedReader(new InputStreamReader(System.in));
-                String pen = initPen.readLine();
-                if (!compare.include(pen, compare.exitComands, compare.goBackComands))
-                    while (!compare.include(pen, compare.exitComands, compare.goBackComands)) {
-                        String fileWriter = initil.readLine();
+                String pen = initil.readLine();
+                if (!compare.include(pen, compare.exitComands, compare.goBackComands)) {
+                    String fileWriter = "";
+                    while (!compare.include(fileWriter, compare.exitComands, compare.goBackComands)) {
+                        fileWriter = initil.readLine() + "\n";
                         byte[] bytes = fileWriter.getBytes();
                         //Files.writeString(Path.of(FileCreator.newFileDir), fileWriter);
                         //pen = fileWriter;
                         FileOutputStream fos = new FileOutputStream(FileCreator.newFileDir, true);
                         fos.write(bytes);
                     }
+                }
                 else if (compare.include(pen, compare.exitComands)) {
                     shutDown = false;
                 } else if ((compare.include(pen, compare.goBackComands))) {
