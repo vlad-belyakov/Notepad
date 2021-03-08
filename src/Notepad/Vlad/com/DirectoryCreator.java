@@ -7,7 +7,7 @@ import java.nio.file.Path;
 public class DirectoryCreator extends Creators{
     protected static String newDirPath;
     protected String oldDirPath = "C:\\Users\\vledb\\OneDrive\\Документы\\Директории_блокнота\\";
-    protected Path endPath;
+    protected Path endPath = Path.of(oldDirPath);
     DirectoryCreator(String path) {
         newDirPath = oldDirPath + path;
         endPath = Path.of(newDirPath);
@@ -36,6 +36,7 @@ public class DirectoryCreator extends Creators{
     protected void goBack() throws IOException{
         ClientWork C = new ClientWork();
         endPath = endPath.getParent();
+        newDirPath = endPath.toString();
         C.dirWork();
     }
 }
