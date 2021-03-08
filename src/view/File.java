@@ -17,7 +17,6 @@ public class File {
         fis.close();
 
         var content = new String(data, StandardCharsets.UTF_8);
-
         return content;
     }
 

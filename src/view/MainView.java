@@ -73,7 +73,7 @@ public class MainView extends JFrame {
                 JFileChooser dialog = new JFileChooser();
                 dialog.showOpenDialog(Content);
                 var file = dialog.getSelectedFile();
-                if (file.isFile() && file.canRead()) {
+                if (file != null && file.isFile() && file.canRead()) {
                     File f = new File(file.getPath());
                     try {
                         TextForm.setText(f.Read());
@@ -111,6 +111,9 @@ public class MainView extends JFrame {
                 JFileChooser dialog = new JFileChooser();
                 dialog.showSaveDialog(Content);
                 var file = dialog.getSelectedFile();
+                if (file == null) {
+                    return;
+                }
                 File f = new File(file.getPath());
                 try {
                     f.Write(TextForm.getText());
