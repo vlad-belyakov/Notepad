@@ -1,20 +1,24 @@
 package view;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class MainView extends JFrame {
     private JPanel Content;
     private JTextArea TextForm;
-    private JButton SaveButton;
-    private JButton OpenButton;
+    private JButton saveButton;
+    private JButton openButton;
+    private JButton decodeButton;
+    private JButton jsonButton;
+
+    private Convertor convert;
 
     public MainView() {
         this.setContentPane(Content);
@@ -22,10 +26,14 @@ public class MainView extends JFrame {
         this.setSize(400,400);
         this.setVisible(true);
 
-        OpenButton.addMouseListener(getOpenButtonListener());
-        SaveButton.addMouseListener(getSaveButtonListener());
+        openButton.addMouseListener(getOpenButtonListener());
+        saveButton.addMouseListener(getSaveButtonListener());
+        decodeButton.addMouseListener(getDecodeButtonListener());
+        jsonButton.addMouseListener(getJsonButtonListener());
 
         this.addWindowListener(getWindowListener());
+
+        convert = new Convertor();
     }
 
     private WindowListener getWindowListener() {
@@ -121,6 +129,61 @@ public class MainView extends JFrame {
                 } catch (IOException e) {
                     TextForm.setText(e.getMessage());
                 }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {}
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {}
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        };
+    }
+    private MouseListener getDecodeButtonListener() {
+        return new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                var text = TextForm.getText();
+                var decText = convert.Decode(text);
+                if (decText.equals("")) {
+                    return;
+                }
+                TextForm.setText(decText);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {}
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {}
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        };
+    }
+    private MouseListener getJsonButtonListener() {
+        return new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                Gson json = new GsonBuilder().setPrettyPrinting().create();
+                var obj = json.fromJson(TextForm.getText(), Object.class);
+                TextForm.setText(json.toJson(obj));
             }
 
             @Override
