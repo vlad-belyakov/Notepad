@@ -17,7 +17,7 @@ public class MainView extends JFrame {
     private JButton OpenButton;
 
     public MainView() {
-        this.getContentPane().add(Content);
+        this.setContentPane(Content);
         this.pack();
         this.setSize(400,400);
         this.setVisible(true);
@@ -72,6 +72,7 @@ public class MainView extends JFrame {
             public void mouseClicked(MouseEvent mouseEvent) {
                 JFileChooser dialog = new JFileChooser();
                 dialog.showOpenDialog(Content);
+
                 var file = dialog.getSelectedFile();
                 if (file != null && file.isFile() && file.canRead()) {
                     File f = new File(file.getPath());
@@ -123,14 +124,10 @@ public class MainView extends JFrame {
             }
 
             @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-
-            }
+            public void mousePressed(MouseEvent mouseEvent) {}
 
             @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-
-            }
+            public void mouseReleased(MouseEvent mouseEvent) {}
 
             @Override
             public void mouseEntered(MouseEvent mouseEvent) {
