@@ -1,4 +1,4 @@
-package Notepad.Vlad.com;
+package Vlad.com;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
