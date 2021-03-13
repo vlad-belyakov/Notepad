@@ -21,10 +21,7 @@ public class MainView extends JFrame {
     private Convertor convert;
 
     public MainView() {
-        this.setContentPane(Content);
-        this.pack();
-        this.setSize(400,400);
-        this.setVisible(true);
+        convert = new Convertor();
 
         openButton.addMouseListener(getOpenButtonListener());
         saveButton.addMouseListener(getSaveButtonListener());
@@ -33,7 +30,10 @@ public class MainView extends JFrame {
 
         this.addWindowListener(getWindowListener());
 
-        convert = new Convertor();
+        this.setContentPane(Content);
+        this.setSize(400,400);
+        this.pack();
+        this.setVisible(true);
     }
 
     private WindowListener getWindowListener() {
